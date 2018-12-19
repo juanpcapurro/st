@@ -29,7 +29,7 @@ static float chscale = 1.0;
 
 /*
  * word delimiter string
- *
+a*
  * More advanced example: " `'\"()[]{}"
  */
 char *worddelimiters = " ";
@@ -83,15 +83,10 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 used in escape sequence) */
+//stolen from my terminator config, which is in turn stolen from some 'papercolor' theme from the interwebs
 static const char *palettes[][16] = {
-    {"black", "red3", "green3", "yellow3", "blue2", "magenta3", "cyan3", "gray90",
-    "gray50", "red", "green", "yellow", "#5c5cff", "magenta", "cyan", "white"},
-    {"#223", "#900", "#080", "#fe7", "#35e", "#fc5", "#18e", "#aaa",
-    "#666", "#f25", "#0b0", "#ff6", "#46f", "#d6a", "#6bf", "#ddd"},
-    {"#eaeaea", "#b7141f", "#457b24", "#fc7b08", "#134eb2", "#560088", "#0e717c", "#777777",
-    "#424242", "#e83b3f", "#7aba3a", "#fd8e09", "#54a4f3", "#aa4dbc", "#26bbd1", "#aaaaaa"},
-    {"#20242d", "#b04b57", "#87b379", "#e5c179", "#7d8fa4", "#a47996", "#85a7a5", "#b3b8c3",
-    "#000000", "#b04b57", "#87b379", "#e5c179", "#7d8fa4", "#a47996", "#85a7a5", "#ffffff"},
+    {"#2c2c2c","#c62828","#558b2e","#f9a825","#1565c1","#6a1e9a","#00838f","#ffffff","#969694","#f15250","#86bd47","#f8e63a","#77b2f6","#b963c8","#25c3dc","#ffffff"},
+    {"#f8f8f8","#d7005f","#718c00","#ff8f01","#005f87","#6a1e9a","#3e999f","#2c2c2c","#2c2c2c","#ef5251","#90c94d","#ffa000","#4271ae","#c774c1","#3e999f","#f5f5f5"},
 };
 
 static const char **colorname;
@@ -101,9 +96,9 @@ static const char **colorname;
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 5;
+unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 5;
+static unsigned int defaultcs = 14;
 static unsigned int defaultrcs = 5;
 
 /*
@@ -113,7 +108,7 @@ static unsigned int defaultrcs = 5;
  * 6: Bar ("|")
  * 7: Snowman ("☃")
  */
-static unsigned int cursorshape = 2;
+static unsigned int cursorshape = 4;
 
 /*
  * Default columns and rows numbers
@@ -150,27 +145,20 @@ static MouseShortcut mshortcuts[] = {
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
-	/* mask                 keysym          function        argument */
-	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
-	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
-	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
-	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_greater,     zoom,           {.f = +1} },
-	{ TERMMOD,              XK_less,        zoom,           {.f = -1} },
-	{ TERMMOD,              XK_question,    zoomreset,      {.f =  0} },
-	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
-	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
-	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
-	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_F1,          setpalette,     {.i =  0} },
-	{ MODKEY|ShiftMask,     XK_F2,          setpalette,     {.i =  1} },
-	{ MODKEY|ShiftMask,     XK_F3,          setpalette,     {.i =  2} },
-	{ MODKEY|ShiftMask,     XK_F4,          setpalette,     {.i =  3} },
-	{ MODKEY|ShiftMask,     XK_F5,          setpalette,     {.i =  4} },
-	{ MODKEY|ShiftMask,     XK_F6,          setpalette,     {.i =  5} },
-	{ MODKEY|ShiftMask,     XK_F7,          setpalette,     {.i =  6} },
-	{ MODKEY|ShiftMask,     XK_F8,          setpalette,     {.i =  7} },
-	{ MODKEY|ShiftMask,     XK_F9,          setpalette,     {.i =  8} },
+	/* mask           keysym          function        argument */
+	{ XK_ANY_MOD,     XK_Break,       sendbreak,      {.i =  0} },
+	{ ControlMask,    XK_Print,       toggleprinter,  {.i =  0} },
+	{ ShiftMask,      XK_Print,       printscreen,    {.i =  0} },
+	{ XK_ANY_MOD,     XK_Print,       printsel,       {.i =  0} },
+	{ TERMMOD,        XK_greater,     zoom,           {.f = +1} },
+	{ TERMMOD,        XK_less,        zoom,           {.f = -1} },
+	{ TERMMOD,        XK_question,    zoomreset,      {.f =  0} },
+	{ TERMMOD,        XK_C,           clipcopy,       {.i =  0} },
+	{ TERMMOD,        XK_V,           clippaste,      {.i =  0} },
+	{ TERMMOD,        XK_Y,           selpaste,       {.i =  0} },
+	{ TERMMOD,        XK_Num_Lock,    numlock,        {.i =  0} },
+	{ TERMMOD,        XK_D,           setpalette,     {.i =  0} },
+	{ TERMMOD,        XK_W,           setpalette,     {.i =  1} },
 };
 
 

@@ -1871,6 +1871,8 @@ usage(void)
 void setpalette(const Arg *arg) {
 
     if ( arg->i < LEN(palettes) )   {
+        // FIXME: this is temporary
+        fprintf(stderr, "changed pallete to %i, out of %i palletes\n", arg->i, LEN(palettes));
         colorname = palettes[arg->i];
         xloadcols();
         cresize(win.w, win.h);
