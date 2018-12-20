@@ -82,14 +82,34 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
-/* Terminal colors (16 used in escape sequence) */
-//stolen from my terminator config, which is in turn stolen from some 'papercolor' theme from the interwebs
-static const char *palettes[][16] = {
-    {"#2c2c2c","#c62828","#558b2e","#f9a825","#1565c1","#6a1e9a","#00838f","#ffffff","#969694","#f15250","#86bd47","#f8e63a","#77b2f6","#b963c8","#25c3dc","#ffffff"},
-    {"#f8f8f8","#d7005f","#718c00","#ff8f01","#005f87","#6a1e9a","#3e999f","#2c2c2c","#2c2c2c","#ef5251","#90c94d","#ffa000","#4271ae","#c774c1","#3e999f","#f5f5f5"},
-};
+/* Terminal colors (16 first used in escape sequence) */
+static const char *colorname[] = {
+	/* 8 normal colors */
+	"black",
+	"red3",
+	"green3",
+	"yellow3",
+	"blue2",
+	"magenta3",
+	"cyan3",
+	"gray90",
 
-static const char **colorname;
+	/* 8 bright colors */
+	"gray50",
+	"red",
+	"green",
+	"yellow",
+	"#5c5cff",
+	"magenta",
+	"cyan",
+	"white",
+
+	[255] = 0,
+
+	/* more colors can be added after 255 to use with DefaultXX */
+	"#cccccc",
+	"#555555",
+};
 
 
 /*
@@ -98,8 +118,8 @@ static const char **colorname;
  */
 unsigned int defaultfg = 7;
 unsigned int defaultbg = 0;
-static unsigned int defaultcs = 14;
-static unsigned int defaultrcs = 5;
+static unsigned int defaultcs = 256;
+static unsigned int defaultrcs = 257;
 
 /*
  * Default shape of cursor
@@ -157,10 +177,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,        XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,        XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,        XK_Num_Lock,    numlock,        {.i =  0} },
-	{ TERMMOD,        XK_D,           setpalette,     {.i =  0} },
-	{ TERMMOD,        XK_W,           setpalette,     {.i =  1} },
 };
-
 
 /*
  * Special keys (change & recompile st.info accordingly)
@@ -442,4 +459,3 @@ static char ascii_printable[] =
 	" !\"#$%&'()*+,-./0123456789:;<=>?"
 	"@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_"
 	"`abcdefghijklmnopqrstuvwxyz{|}~";
-
