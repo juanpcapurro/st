@@ -140,7 +140,9 @@ static char * palletes[][COLORNAME_LENGHT]= {
   }
 };
 
-char **colorname = palletes[1];
+int chosen_pallette=0;
+
+char **colorname = palletes[0];
 
 /*
  * Default colors (colorname index)
@@ -207,6 +209,7 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,        XK_V,           clippaste,      {.i =  0} },
 	{ TERMMOD,        XK_Y,           selpaste,       {.i =  0} },
 	{ TERMMOD,        XK_Num_Lock,    numlock,        {.i =  0} },
+	{ TERMMOD,        XK_M,           setpallette,    {       } },
 };
 
 /*

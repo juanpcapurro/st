@@ -56,6 +56,7 @@ static void selpaste(const Arg *);
 static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
+static void setpallette();
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -749,6 +750,13 @@ xloadcols(void)
 				die("could not allocate color %d\n", i);
 		}
 	loaded = 1;
+}
+
+static void setpallette(){
+  int new_pallette = ++chosen_pallette % PALLETES_LENGTH;
+  colorname = palletes[new_pallette];
+  xloadcols();
+  cresize(win.w, win.h);
 }
 
 int
