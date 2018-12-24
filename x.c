@@ -733,7 +733,7 @@ xloadcols(void)
 	static int loaded;
 	Color *cp;
 
-	dc.collen = MAX(LEN(colorname), 256);
+	dc.collen = MAX(COLORNAME_LENGHT, 256);
 	dc.col = xmalloc(dc.collen * sizeof(Color));
 
 	if (loaded) {

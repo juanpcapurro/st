@@ -83,44 +83,73 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+#define COLORNAME_LENGHT 260
+#define PALLETES_LENGTH 2
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+static char * palletes[][COLORNAME_LENGHT]= {
+  {
+    "#2c2c2c",
+    "#c62828",
+    "#558b2e",
+    "#f9a825",
+    "#1565c1",
+    "#6a1e9a",
+    "#00838f",
+    "#ffffff",
+    "#969694",
+    "#f15250",
+    "#86bd47",
+    "#f8e63a",
+    "#77b2f6",
+    "#b963c8",
+    "#25c3dc",
+    "#ffffff",
 
-	[255] = 0,
+    [255] = 0,
 
-	/* more colors can be added after 255 to use with DefaultXX */
-	"#2e2e2d",
-	"#f2f2f2",
-	"#25C3DC",
+    /* more colors can be added after 255 to use with DefaultXX */
+    "#2e2e2d",
+    "#f2f2f2",
+    "#25C3DC",
+    "#25C3DC",
+  },
+  {
+    "#f8f8f8",
+    "#d7005f",
+    "#718c00",
+    "#ff8f01",
+    "#005f87",
+    "#6a1e9a",
+    "#3e999f",
+    "#2c2c2c",
+    "#2c2c2c",
+    "#ef5251",
+    "#90c94d",
+    "#ffa000",
+    "#4271ae",
+    "#c774c1",
+    "#3e999f",
+    "#f5f5f5",
+    [255] = 0,
+
+    /* more colors can be added after 255 to use with DefaultXX */
+    "#eeeeee",
+    "#3c3c3b",
+    "#25C3DC",
+    "#25C3DC",
+  }
 };
 
+char **colorname = palletes[1];
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 257;
 unsigned int defaultbg = 256;
+unsigned int defaultfg = 257;
 static unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 258;
+static unsigned int defaultrcs = 259;
 
 /*
  * Default shape of cursor
